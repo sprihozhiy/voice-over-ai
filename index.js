@@ -10,12 +10,12 @@ const configuration = new Configuration({
 });
 
 // Path to the MP4 video file
-const audioFilePath = 'sassefabian1.mp3';
+const audioFilePath = 'original-audio-de.mp3';
 
 const openai = new OpenAIApi(configuration);
 
 async function getTranscription() {
-    const resp = await openai.createTranscription(
+    const resp = await openai.createTranslation(
         fs.createReadStream(audioFilePath),
         "whisper-1"
     );
@@ -24,7 +24,7 @@ async function getTranscription() {
     const transcript = resp.data.text;
 
     // Save the transcript to a text file
-    const transcriptFilePath = 'transcript.txt';
+    const transcriptFilePath = 'translation.txt';
     fs.writeFileSync(transcriptFilePath, transcript);
 
     console.log(`Transcription saved to ${transcriptFilePath}`);
